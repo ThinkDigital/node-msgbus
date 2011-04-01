@@ -1,0 +1,32 @@
+{
+	"name"			: "msgbus",
+	"version"		: "0.1.0",
+	"description"	: "NodeJS IPC Message Bus (client+server)",
+	"keywords"		: [
+		"dbus",
+		"bus",
+		"message",
+		"ipc"
+	],
+	"author"		: {
+		"name"	: "Diogo Resende",
+		"email"	: "dresende@thinkdigital.pt",
+		"url"	: "http://www.thinkdigital.pt"
+	},
+	"engines"		: {
+		"node"	: ">= 0.4.0"
+	},
+	"repository"	: {
+		"type"	: "git",
+		"url"	: "http://github.com/ThinkDigital/node-msgbus.git"
+	},
+	"directories"	: {
+		"lib"		: "./lib",
+		"example"	: "./example"
+	},
+	"main"			: "./lib/msgbus",
+	"licenses"		: [{
+		"type"	: "MIT",
+		"url"	: "http://github.com/dresende/node-orm/raw/master/LICENSE"
+	}]
+}
