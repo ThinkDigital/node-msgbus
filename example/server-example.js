@@ -7,6 +7,8 @@ var msgbus = require(__dirname + "/../lib/msgbus"),
     server = msgbus.createServer({ "debug": true }),
     iface = process.argv[2];
 
+server.addAccount("client1", "password");
+
 server.bind(iface, function (err) {
 	if (err) {
 		console.log("MsgBus server failed to bind");

@@ -1,5 +1,5 @@
 if (process.argv.length < 4) {
-	console.log("Usage: client-example.js <bind> <client-id>");
+	console.log("Usage: client-example.js <bind> <client-id> [<password>]");
 	process.exit(1);
 }
 
@@ -14,7 +14,11 @@ client.connect(iface, function (err) {
 		console.dir(err);
 		return;
 	}
-	client.identify(id);
+	if (process.argv.length > 4) {
+		client.identify(id, process.argv[4]);
+	} else {
+		client.identify(id);
+	}
 });
 client.on("broadcast", function (from, msg, msg_id) {
 	//console.log("[%s] broadcast from %s:", this.id, from, msg);
