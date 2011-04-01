@@ -21,9 +21,13 @@ client.on("broadcast", function (from, msg, msg_id) {
 	
 	// reply from time to time
 	if (Math.random() > 0.7) {
-		//console.log("[%s] sending reply to %s.%s...", this.id, from, msg_id);
 		client.reply(from, msg_id, { reply: from });
+	} else if (Math.random() > 0.7) {
+		client.send(from, { "msg": "hello to from " + this.id + " to " + from });
 	}
+});
+client.on("message", function (from, msg, msg_id) {
+	//console.log("[%s] message from %s:", this.id, from, msg);
 });
 client.on("error", function (err) {
 	console.log("[%s] error: %s", this.id, err.message);
