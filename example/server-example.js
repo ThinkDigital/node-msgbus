@@ -4,7 +4,7 @@ if (process.argv.length < 3) {
 }
 
 var msgbus = require(__dirname + "/../lib/msgbus"),
-    server = msgbus.createServer(),
+    server = msgbus.createServer({ "debug": true }),
     iface = process.argv[2];
 
 server.bind(iface, function (err) {
@@ -13,5 +13,13 @@ server.bind(iface, function (err) {
 		console.dir(err);
 		return;
 	}
-	console.log("MsgBus server binded to %s", iface);
+});
+server.on("online", function (id) {
+	//console.log("client %s is now online", id);
+});
+server.on("offline", function (id) {
+	//console.log("client %s is now offline", id);
+});
+server.on("broadcast", function (id, msg) {
+	//console.log("client %s broadcast: ", id, msg);
 });

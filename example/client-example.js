@@ -6,7 +6,7 @@ if (process.argv.length < 4) {
 var msgbus = require(__dirname + "/../lib/msgbus"),
     iface = process.argv[2],
     id = process.argv[3],
-    client = msgbus.createClient();
+    client = msgbus.createClient({ "debug": true });
 
 client.connect(iface, function (err) {
 	if (err) {
@@ -14,16 +14,14 @@ client.connect(iface, function (err) {
 		console.dir(err);
 		return;
 	}
-	client.identify(id, function () {
-		console.log("[%d] is now identified", id);
-	});
+	client.identify(id);
 });
 client.on("broadcast", function (from, msg, msg_id) {
-	console.log("[%s] broadcast from %s:", this.id, from, msg);
+	//console.log("[%s] broadcast from %s:", this.id, from, msg);
 	
 	// reply from time to time
 	if (Math.random() > 0.7) {
-		console.log("[%s] sending reply to %s.%s...", this.id, from, msg_id);
+		//console.log("[%s] sending reply to %s.%s...", this.id, from, msg_id);
 		client.reply(from, msg_id, { reply: from });
 	}
 });
@@ -42,10 +40,7 @@ setTimeout(function () {
 }, (Math.round(Math.random() * 10) + 10) * 1000); // wait between 10 and 20secs before stopping
 
 function sendBroadcast() {
-	var msg = {};
-	msg[id] = "hello";
-
-	client.broadcast(msg, checkResponse);
+	client.broadcast({ "msg": "hello from " + id }, checkResponse);
 	
 	setTimeout(function () {
 		sendBroadcast();
@@ -53,5 +48,5 @@ function sendBroadcast() {
 }
 
 function checkResponse(msg) {
-	console.log("[%s] reply:", client.id, msg);
+	//console.log("[%s] reply:", client.id, msg);
 }
