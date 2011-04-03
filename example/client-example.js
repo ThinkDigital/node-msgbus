@@ -30,6 +30,9 @@ client.on("broadcast", function (from, msg, msg_id) {
 		client.send(from, { "msg": "hello to from " + this.id + " to " + from });
 	}
 });
+client.on("signal-xpto", function (from, msg_id) {
+	// signal 'xpto' from <from>
+});
 client.on("message", function (from, msg, msg_id) {
 	//console.log("[%s] message from %s:", this.id, from, msg);
 });
@@ -43,6 +46,10 @@ setTimeout(function () {
 }, Math.round(Math.random() * 1000));
 
 setTimeout(function () {
+	sendSignal();
+}, Math.round(Math.random() * 1000));
+
+setTimeout(function () {
 	//client.close();
 	process.exit(0);
 }, (Math.round(Math.random() * 10) + 10) * 1000); // wait between 10 and 20secs before stopping
@@ -52,6 +59,14 @@ function sendBroadcast() {
 	
 	setTimeout(function () {
 		sendBroadcast();
+	}, Math.round(Math.random() * 4000));
+}
+
+function sendSignal() {
+	client.signal("xpto", checkResponse);
+	
+	setTimeout(function () {
+		sendSignal();
 	}, Math.round(Math.random() * 4000));
 }
 
