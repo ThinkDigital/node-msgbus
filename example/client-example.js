@@ -45,6 +45,15 @@ client.on("error", function (err) {
 });
 
 setTimeout(function () {
+	client.online("client1", function (status) {
+		if (status.online === false) {
+			console.log("Cannot run without client1 online (this is just an example)");
+			process.exit(1);
+		}
+	});
+}, 1000);
+
+setTimeout(function () {
 	sendBroadcast();
 }, Math.round(Math.random() * 1000));
 
