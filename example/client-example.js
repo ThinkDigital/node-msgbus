@@ -1,4 +1,7 @@
 if (process.argv.length < 4) {
+	// run: node client-example.js msgbus.sock client1 password
+	//  or
+	// run: node client-example.js msgbus.sock client2
 	console.log("Usage: client-example.js <bind> <client-id> [<password>]");
 	process.exit(1);
 }

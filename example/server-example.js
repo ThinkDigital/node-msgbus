@@ -1,4 +1,5 @@
 if (process.argv.length < 3) {
+	// run: node server-example.js msgbus.sock
 	console.log("Usage: server-example.js <bind>");
 	process.exit(1);
 }
