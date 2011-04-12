@@ -26,3 +26,11 @@ server.on("offline", function (id) {
 server.on("broadcast", function (id, msg) {
 	//console.log("client %s broadcast: ", id, msg);
 });
+
+process.on('SIGINT', function () {
+	console.log("Trying to stop server..");
+	server.close(function () {
+		console.log("Server closed");
+		process.exit(0);
+	});
+});
